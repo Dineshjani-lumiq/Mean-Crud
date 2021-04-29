@@ -1,0 +1,37 @@
+   <mat-table [dataSource]="dataSource">
+  <!-- User name Definition -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+  </ng-container>
+ <ng-container matColumnDef="phonenumber">
+    <mat-header-cell *matHeaderCellDef> phonenumber</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.phonenumber}} </mat-cell>
+  </ng-container>
+  <!-- Age Definition -->
+   <ng-container matColumnDef="gender">
+    <mat-header-cell *matHeaderCellDef> gender</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.gender}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dateofbirth">
+    <mat-header-cell *matHeaderCellDef> Date of Birth</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.dateofbirth}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="address">
+    <mat-header-cell *matHeaderCellDef> Address</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.address}} </mat-cell>
+  </ng-container>
+   <ng-container matColumnDef="Subjects">
+    <mat-header-cell *matHeaderCellDef> marks</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.marks}} </mat-cell>
+    
+  </ng-container>
+
+  <!-- Title Definition -->
+ 
+
+  <!-- Header and Row Declarations -->
+   <mat-header-row *matHeaderRowDef="['name', 'phonenumber','gender','dateofbirth','address','Subjects']"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: ['name', 'phonenumber','gender','dateofbirth','address','Subjects']"></mat-row>
+ 
+</mat-table>
