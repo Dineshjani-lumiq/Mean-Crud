@@ -21,7 +21,7 @@ gender:'',
     marks:['']
    
   };
-   baseURL = 'http://localhost:8553/students';
+   baseURL = 'http://localhost:8559/students';
    constructor(private http: HttpClient) { }
 
     postEmployee(emp?: Student) {
@@ -34,6 +34,18 @@ gender:'',
    getstudentList():Observable<Student[]> {
 
     return this.http.get<Student[]>(this.baseURL);
+  }
+  deletestudent(emp:number){
+    console.log("delete");
+    console.log(emp);
+    return this.http.delete(this.baseURL+"/"+emp);
+
+  }
+  updatestudent(emp?:Student){
+console.log("from update");
+    console.log(emp);
+    return this.http.put(this.baseURL, emp);
+
   }
 
 

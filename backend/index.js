@@ -17,10 +17,9 @@ const { mongoose } = require('./db.js');
 var employeeController = require('./controllers/employeecontroller.js');
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
-
-app.listen(8553, () => console.log('Server started at port : 3045'));
+app.listen(8559, () => console.log('Server started at port : 3045'));
 
 
 app.use('/students', employeeController);

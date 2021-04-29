@@ -1,0 +1,18 @@
+.form-group input { 
+    width: 320px;
+ }
+
+ .error-msg {
+  display: block;
+  position: absolute;
+  font-size: 75%;
+  bottom: -2em;
+}
+.error{
+    color: red;
+} 
+
+.subjects{
+    border: 2px solid blue;
+    width: 328px;
+}

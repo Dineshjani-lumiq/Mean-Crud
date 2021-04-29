@@ -1,1 +1,52 @@
-<p>update works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+
+
+      <div *ngIf="userForm.invalid && !formSubmitted" [ngClass]="'error'"> Form not validated. </div>
+      <div *ngIf="formSubmitted" [ngClass]="'success'"> Form submitted successfully. </div> <br />
+      <div class="form-group">
+        <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+            <div>
+            <input mdbInput class="margin" formControlName="phonenumber" placeholder="Enter phonenumber ">
+            <label *ngIf="userForm.get('phonenumber')?.invalid" [ngClass]="'error'"> </label>
+
+          </div>
+          <br>
+          <div>
+            <input mdbInput class="margin" formControlName="name" placeholder="Enter Name">
+            <div *ngIf="userForm.controls['name'].dirty  &&userForm.controls['name'].errors" class="error">
+              <div *ngIf="userForm.controls['name'].errors.required">
+                Full name required.
+              </div>
+            </div>
+            <div *ngIf="userForm.controls['name'].hasError('minlength')">
+              Minimum length should be 5.
+            </div>
+            <div *ngIf="userForm.controls['name'].hasError('maxlength')">
+              Maximum length should be 10.
+            </div>
+
+          </div>
+
+          
+
+
+
+          <div>
+            <button type="submit" [disabled]="!userForm.valid" [disabled]="!userForm.valid">Submit</button>
+
+          </div>
+        </form>
+        <div>
+          <div class="col s7">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

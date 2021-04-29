@@ -1,1 +1,18 @@
-<p>delete works!</p>
+<div *ngIf="userForm.invalid && !formSubmitted" [ngClass] = "'error'"> Form not validated. </div>
+<div *ngIf="formSubmitted" [ngClass] = "'success'"> Form submitted successfully. </div> <br/>
+<div> 
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <div>
+        <input mdbInput class="margin" formControlName="phonenumber" placeholder="Enter phonenumber ">
+        <label *ngIf="userForm.get('phonenumber')?.invalid" [ngClass]="'error'"> </label>
+    
+    </div>
+     
+  <div>
+	<button type="submit" [disabled]="!userForm.valid"[disabled]="!userForm.valid">Submit</button>
+	
+  </div>
+</form>
+</div>
+
+

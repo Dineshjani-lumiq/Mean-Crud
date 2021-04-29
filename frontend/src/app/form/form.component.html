@@ -1,81 +1,90 @@
 <div class="container">
- <div class="row">
-  <div class="col s12">
-  
-          
+  <div class="row">
+    <div class="col s12">
 
 
-<div *ngIf="userForm.invalid && !formSubmitted" [ngClass] = "'error'"> Form not validated. </div>
-<div *ngIf="formSubmitted" [ngClass] = "'success'"> Form submitted successfully. </div> <br/>
-<div> 
-<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
-  <div>
-	 <input mdbInput class="margin" formControlName="name"  placeholder="Enter Name">
-<div *ngIf="userForm.controls['name'].dirty  &&userForm.controls['name'].errors" class="error">
-					<div *ngIf="userForm.controls['name'].errors.required">
-						Full name required.
-					</div>
-				</div>
-  <div *ngIf="userForm.controls['name'].hasError('minlength')"> 
-    Minimum length should be 5.
-</div>
-<div *ngIf="userForm.controls['name'].hasError('maxlength')"> 
-    Maximum length should be 10.
-</div> 
 
-  </div>
-   
-       <div>
-        <input mdbInput class="margin" formControlName="phonenumber" placeholder="Enter phonenumber ">
-        <label *ngIf="userForm.get('phonenumber')?.invalid" [ngClass]="'error'"> </label>
-    
-    </div>
-   
+
+      <div *ngIf="userForm.invalid && !formSubmitted" [ngClass]="'error'"> Form not validated. </div>
+      <div *ngIf="formSubmitted" [ngClass]="'success'"> Form submitted successfully. </div> <br />
+      <div class="form-group">
+        <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
           <div>
-        <input mdbInput class="margin" formControlName="dateofbirth" placeholder="Enter dateofbirth ">
-        <label *ngIf="userForm.get('dateofbirth')?.invalid" [ngClass]="'error'"> </label>
-    
-    </div>
-        <div>
-        <input mdbInput class="margin" formControlName="gender" placeholder="Enter gender ">
-        <label *ngIf="userForm.get('gender')?.invalid" [ngClass]="'error'"> </label>
-    
-    </div>
+            <input mdbInput class="margin" formControlName="name" placeholder="Enter Name">
+            <div *ngIf="userForm.controls['name'].dirty  &&userForm.controls['name'].errors" class="error">
+              <div *ngIf="userForm.controls['name'].errors.required">
+                Full name required.
+              </div>
+            </div>
+            <div *ngIf="userForm.controls['name'].hasError('minlength')"   class="error">
+              Minimum length should be 3.
+            </div>
+            <div *ngIf="userForm.controls['name'].hasError('maxlength')" class="error">
+              Maximum length should be 10.
+            </div>
 
-<div formArrayName="address">
-	<div *ngFor="let skills of address.controls; index as idx">
-	 <input mdbInput class="margin" [formControlName]="idx" placeholder="Enter adddress">
-     <button type="button" (click)="deleteaddressField(idx)">Delete</button>
-	 <button class="marginp" type="button" (click)="addaddressField()">Add more adddress</button> 
-	</div>
-  </div>
-
- 
-   
-    
-
-  <div formArrayName="Subjects">
-	<div *ngFor="let skills of Subjects.controls; index as idx">
-	 <input mdbInput class="margin" [formControlName]="idx" placeholder="Enter subjects marks of {{this.subjectlist[idx]}} ">
-    
-	 
-	</div>
-  </div>
-  
-  
-  
-  <div>
-	<button type="submit" [disabled]="!userForm.valid"[disabled]="!userForm.valid">Submit</button>
-	
-  </div>
-</form>
-<div>
-<div class="col s7">
-             
           </div>
-    </div>
+
+          <div>
+            <input mdbInput class="margin" formControlName="phonenumber" placeholder="Enter phonenumber ">
+             <div *ngIf="userForm.controls['phonenumber'].invalid && 
+        userForm.controls['phonenumber'].errors && 
+        (userForm.controls['phonenumber'].dirty || userForm.controls['phonenumber'].touched)" class="error">
+phonenumber shoud be 10 digit
+          </div>
+
+          </div>
+
+          <div>
+            <input mdbInput class="margin" formControlName="dateofbirth" placeholder="Enter dateofbirth ">
+             <div *ngIf="userForm.controls['dateofbirth'].invalid && 
+        userForm.controls['dateofbirth'].errors && 
+        (userForm.controls['dateofbirth'].dirty || userForm.controls['dateofbirth'].touched)" class="error">
+Birthdate should be in yyyy-mm-dd format
+          </div>
+
+          </div>
+          <div>
+            <input mdbInput class="margin" formControlName="gender" placeholder="Enter gender ">
+            <label *ngIf="userForm.get('gender')?.invalid" [ngClass]="'error'"> </label>
+
+          </div>
+
+          <div formArrayName="address">
+            <div *ngFor="let skills of address.controls; index as idx">
+              <input mdbInput class="margin" [formControlName]="idx" placeholder="Enter adddress">
+              <button type="button" (click)="deleteaddressField(idx)">Delete</button>
+              <button class="marginp" type="button" (click)="addaddressField()">Add more adddress</button>
+            </div>
+          </div>
+
+
+
+
+
+          <div formArrayName="Subjects">
+            <div *ngFor="let skills of Subjects.controls; index as idx" class="subjects">
+              <input mdbInput class="margin" [formControlName]="idx"
+                placeholder="Enter subjects marks of {{this.subjectlist[idx]}} ">
+
+
+            </div>
+          </div>
+
+
+
+          <div>
+            <button type="submit" [disabled]="!userForm.valid" [disabled]="!userForm.valid">Submit</button>
+
+          </div>
+        </form>
+        <div>
+          <div class="col s7">
+
+          </div>
         </div>
       </div>
     </div>
- 
+  </div>
+
 </div>

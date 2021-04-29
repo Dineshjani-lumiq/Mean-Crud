@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { ExchangeService } from './../exchange.service';
 import { Component } from '@angular/core';
 import { NgForm ,FormGroup,FormArray,FormControl,Validators,ReactiveFormsModule} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button'
 
 
 @Component({
@@ -16,25 +19,25 @@ export class FormComponent  {
   formSubmitted = false;
    isValidFormSubmitted = false;
 unamePattern = "^[ a-zA-Z\-\']+$";
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 
   userForm = new FormGroup({
-	name: new FormControl('', [Validators.required,Validators.pattern(this.unamePattern),Validators.minLength(5)] ),
+	name: new FormControl('', [Validators.required,Validators.pattern(this.unamePattern),Validators.minLength(3)] ),
   phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)]),
-    	gender: new FormControl(''),
-      dateofbirth:new FormControl(''),
+    	gender: new FormControl('',[Validators.required]),
+      dateofbirth:new FormControl('',[Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]),
       address: new FormArray([
 
 
-      new FormControl('')
+      new FormControl('',[Validators.required])
     ]),
 Subjects: new FormArray([
-new FormControl(''),
-new FormControl(''),
-new FormControl(''),
-new FormControl(''),
-new FormControl('')
+new FormControl('',[Validators.required,Validators.min(0), Validators.max(100)]),
+new FormControl('',[Validators.required,Validators.min(0), Validators.max(100)]),
+new FormControl('',[Validators.required,Validators.min(0), Validators.max(100)]),
+new FormControl('',[Validators.required,Validators.min(0), Validators.max(100)]),
+new FormControl('',[Validators.required,Validators.min(0), Validators.max(100)])
 ])
 ,
 
@@ -79,7 +82,7 @@ return this.userForm.get('Subjects') as FormArray;
   }
 
   addaddressField() { 
-    this.address.push(new FormControl('')); 
+    this.address.push(new FormControl('',[Validators.required])); 
   }
   deleteaddressField(index: number) {
     if(this.address.length>1){

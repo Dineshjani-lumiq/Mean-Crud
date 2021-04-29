@@ -11,13 +11,41 @@ import { FormsModule } from '@angular/forms';
 })
 export class DeleteComponent {
 mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
-
+formSubmitted = false;
+   isValidFormSubmitted = false;
   constructor(private exchangeService: ExchangeService) { }
 
   userForm = new FormGroup({
   phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)])
 
   })
+
+   onFormSubmit(): void {
+    console.log(this.userForm.value);
+   
+var phonenumber=this.userForm?.get('phonenumber')?.value;
+    
+    
+   
+    this.exchangeService?.deletestudent(phonenumber).subscribe((res) => {
+        
+       console.log("data deleted successfully");
+      
+        
+      });
+    this.formSubmitted = true;
+     this.isValidFormSubmitted = true;
+    if(this.userForm.valid) {
+	
+	this.resetForm();
+    } else {
+	this.formSubmitted = false;
+    }
+  }
+  resetForm() { 
+    this.userForm.reset();
+  }
+
    
 
 }

@@ -1,3 +1,4 @@
+import { from } from 'rxjs';
 import { ExchangeService } from './exchange.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MaterialModule} from './material/material.module';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component'
-
+import {CommonModule} from '@angular/common'
 
 
 @NgModule({
@@ -29,8 +30,8 @@ import { DeleteComponent } from './delete/delete.component'
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
-    
+    MaterialModule,
+    CommonModule  
   ],
   providers: [ExchangeService],
   bootstrap: [AppComponent]
