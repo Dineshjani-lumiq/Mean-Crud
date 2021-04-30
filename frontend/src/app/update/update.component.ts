@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 export class UpdateComponent {
 
  constructor(private exchangeService: ExchangeService) { }
+ student:any;
   subjectlist=["History","Science","Math","Hindi","English"];
   formSubmitted = false;
    isValidFormSubmitted = false;
@@ -53,10 +54,11 @@ marks:this.userForm?.get('Subjects')?.value
    
     this.exchangeService.updatestudent(mp).subscribe((res) => {
         
-       console.log("data saved successfully");
+       this.student=res;
       
         
       });
+      console.log(this.student);
     this.formSubmitted = true;
      this.isValidFormSubmitted = true;
     if(this.userForm.valid) {

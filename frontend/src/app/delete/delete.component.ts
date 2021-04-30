@@ -10,10 +10,13 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./delete.component.css']
 })
 export class DeleteComponent {
+
+  
 mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 formSubmitted = false;
    isValidFormSubmitted = false;
   constructor(private exchangeService: ExchangeService) { }
+  student:any;
 
   userForm = new FormGroup({
   phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)])
@@ -29,8 +32,7 @@ var phonenumber=this.userForm?.get('phonenumber')?.value;
    
     this.exchangeService?.deletestudent(phonenumber).subscribe((res) => {
         
-       console.log("data deleted successfully");
-      
+this.student=res;      
         
       });
     this.formSubmitted = true;

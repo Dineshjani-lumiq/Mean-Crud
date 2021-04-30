@@ -39,7 +39,7 @@ router.delete('/:id', (req, res) => {
       
       if(ans.length==0||err){
         res.status(201).json({
-          message: 'Not Present in Database'
+          message: 'this phonenumber is Not Present in Database'
         });
       } 
       else{
@@ -65,6 +65,14 @@ router.delete('/:id', (req, res) => {
 router.put('/', (req, res) => {
   console.log(typeof(req.body.phonenumber));
   var a=parseInt(req.body.phonenumber);
+  student.find({phonenumber:a},function(err,ans){
+      
+      if(ans.length==0||err){
+        res.status(201).json({
+          message: 'this phonenumber is Not Present in Database'
+        });
+      }
+      else{
 student.updateMany({ phonenumber: a },{$set:{name:req.body.name}},function(err){
           if(err){
             res.status(201).json({
@@ -77,6 +85,8 @@ student.updateMany({ phonenumber: a },{$set:{name:req.body.name}},function(err){
             }
         
         })
+      }
+    })
 })
 
 

@@ -27,29 +27,44 @@
 
           <div>
             <input mdbInput class="margin" formControlName="phonenumber" placeholder="Enter phonenumber ">
-             <div *ngIf="userForm.controls['phonenumber'].invalid && 
-        userForm.controls['phonenumber'].errors && 
+            
+              <div *ngIf="userForm.controls['phonenumber'].errors?.required&&(userForm.controls['phonenumber'].dirty || userForm.controls['phonenumber'].touched)" class="error">
+               phonenumber required.
+              </div>
+             <div *ngIf="userForm.controls['phonenumber'].invalid && !userForm.controls['phonenumber'].errors?.required&&
+       
         (userForm.controls['phonenumber'].dirty || userForm.controls['phonenumber'].touched)" class="error">
-phonenumber shoud be 10 digit
+Phonenumber should be 10 digit
           </div>
 
           </div>
 
           <div>
             <input mdbInput class="margin" formControlName="dateofbirth" placeholder="Enter dateofbirth ">
-             <div *ngIf="userForm.controls['dateofbirth'].invalid && 
-        userForm.controls['dateofbirth'].errors && 
+             <div *ngIf="userForm.controls['dateofbirth'].errors?.required&&(userForm.controls['dateofbirth'].dirty || userForm.controls['dateofbirth'].touched)" class="error">
+               dateofbirth required.
+              </div>
+             <div *ngIf="userForm.controls['dateofbirth'].invalid && !userForm.controls['dateofbirth'].errors?.required&&
+       
         (userForm.controls['dateofbirth'].dirty || userForm.controls['dateofbirth'].touched)" class="error">
 Birthdate should be in yyyy-mm-dd format
           </div>
 
           </div>
-          <div>
-            <input mdbInput class="margin" formControlName="gender" placeholder="Enter gender ">
-            <label *ngIf="userForm.get('gender')?.invalid" [ngClass]="'error'"> </label>
-
+          
+          <div class="check">
+            <label>Select gender:</label>
+          <label class="forinline">
+            <span>male</span>
+     <input type="radio" value="Male" formControlName="gender">
+       
+   </label>
+   <label class="forinline">
+     <span>female</span>
+     <input type="radio" value="Female" formControlName="gender">
+       
+   </label>
           </div>
-
           <div formArrayName="address">
             <div *ngFor="let skills of address.controls; index as idx">
               <input mdbInput class="margin" [formControlName]="idx" placeholder="Enter adddress">

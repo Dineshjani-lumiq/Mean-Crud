@@ -1,4 +1,4 @@
-.form-group input { 
+.form-group input{ 
     width: 320px;
  }
 
@@ -15,4 +15,13 @@
 .subjects{
     border: 2px solid blue;
     width: 328px;
+}
+.check{
+    width: 320px;
+    padding: 1em;
+}
+.forinline{
+display: inline-flex;
+width: 310px;
+height: 20px;
 }
