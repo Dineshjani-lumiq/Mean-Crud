@@ -27,7 +27,9 @@ this.refreshList();
     
       this.exchangeservice.getstudentList().subscribe(
      
-        lists => this.dataSource = lists
+        lists => this.dataSource = lists,
+       err => console.log('HTTP Error', err),
+        () => console.log('HTTP request completed.')
           
     );
     console.log(this.dataSource);

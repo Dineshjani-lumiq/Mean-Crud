@@ -30,11 +30,13 @@ var phonenumber=this.userForm?.get('phonenumber')?.value;
     
     
    
-    this.exchangeService?.deletestudent(phonenumber).subscribe((res) => {
+    this.exchangeService?.deletestudent(phonenumber).subscribe(
         
-this.student=res;      
+res=>this.student=res,  
+err => console.log('HTTP Error', err),
+        () => console.log('HTTP request completed.')  
         
-      });
+      );
     this.formSubmitted = true;
      this.isValidFormSubmitted = true;
     if(this.userForm.valid) {

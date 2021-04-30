@@ -24,6 +24,7 @@ gender:'',
    baseURL = 'http://localhost:8559/students';
    constructor(private http: HttpClient) { }
 
+
     postEmployee(emp?: Student) {
     console.log("received");
     console.log(emp);
@@ -35,12 +36,16 @@ gender:'',
 
     return this.http.get<Student[]>(this.baseURL);
   }
+
+
   deletestudent(emp:number){
     console.log("delete");
     console.log(emp);
     return this.http.delete(this.baseURL+"/"+emp);
 
   }
+
+  
   updatestudent(emp?:Student){
 console.log("from update");
     console.log(emp);

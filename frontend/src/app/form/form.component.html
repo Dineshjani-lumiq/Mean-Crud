@@ -3,8 +3,6 @@
     <div class="col s12">
 
 
-
-
       <div *ngIf="userForm.invalid && !formSubmitted" [ngClass]="'error'"> Form not validated. </div>
       <div *ngIf="formSubmitted" [ngClass]="'success'"> Form submitted successfully. </div> <br />
       <div class="form-group">
@@ -67,7 +65,7 @@ Birthdate should be in yyyy-mm-dd format
           </div>
           <div formArrayName="address">
             <div *ngFor="let skills of address.controls; index as idx">
-              <input mdbInput class="margin" [formControlName]="idx" placeholder="Enter adddress">
+              <input mdbInput class="margin" [formControlName]="idx" placeholder="Enter adddress{{idx+1}} ">
               <button type="button" (click)="deleteaddressField(idx)">Delete</button>
               <button class="marginp" type="button" (click)="addaddressField()">Add more adddress</button>
             </div>
@@ -81,7 +79,9 @@ Birthdate should be in yyyy-mm-dd format
             <div *ngFor="let skills of Subjects.controls; index as idx" class="subjects">
               <input mdbInput class="margin" [formControlName]="idx"
                 placeholder="Enter subjects marks of {{this.subjectlist[idx]}} ">
-
+<div *ngIf="Subjects.controls[idx].invalid && (Subjects.controls[idx].dirty || Subjects.controls[idx].touched)" class="error">
+      Please provide a valid marks between 0-100.
+    </div>
 
             </div>
           </div>
