@@ -14,22 +14,7 @@
             <label *ngIf="userForm.get('phonenumber')?.invalid" [ngClass]="'error'"> </label>
 
           </div>
-          <br>
-          <div>
-            <input mdbInput class="margin" formControlName="name" placeholder="Enter Name">
-            <div *ngIf="userForm.controls['name'].dirty  &&userForm.controls['name'].errors" class="error">
-              <div *ngIf="userForm.controls['name'].errors.required">
-                Full name required.
-              </div>
-            </div>
-            <div *ngIf="userForm.controls['name'].hasError('minlength')">
-              Minimum length should be 5.
-            </div>
-            <div *ngIf="userForm.controls['name'].hasError('maxlength')">
-              Maximum length should be 10.
-            </div>
-
-          </div>
+         
 
           
 
@@ -40,7 +25,10 @@
 
           </div>
         </form>
-        {{student?.message}}
+        
+        <div class="error">
+  {{student?.message}}
+</div>
         <div>
           <div class="col s7">
 

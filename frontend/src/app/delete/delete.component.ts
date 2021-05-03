@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./delete.component.css']
 })
 export class DeleteComponent {
-
+error:any;
   
 mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 formSubmitted = false;
@@ -33,8 +33,7 @@ var phonenumber=this.userForm?.get('phonenumber')?.value;
     this.exchangeService?.deletestudent(phonenumber).subscribe(
         
 res=>this.student=res,  
-err => console.log('HTTP Error', err),
-        () => console.log('HTTP request completed.')  
+err => this.error=err  
         
       );
     this.formSubmitted = true;

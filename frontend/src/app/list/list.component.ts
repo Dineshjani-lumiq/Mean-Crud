@@ -7,7 +7,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSortModule } from "@angular/material/sort";
 import {MatTableModule} from '@angular/material/table';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,8 +17,9 @@ import {MatTableModule} from '@angular/material/table';
 })
 export class ListComponent implements OnInit {
 dataSource: Student[]=[];
-
-  constructor(private exchangeservice:ExchangeService) { }
+phonenumber:any;
+student:any;
+  constructor(private router: Router,private exchangeservice:ExchangeService) { }
 
   ngOnInit(): void {
 this.refreshList();
@@ -33,7 +34,30 @@ this.refreshList();
           
     );
     console.log(this.dataSource);
+
+
    
   }
+  
+  ondelete(row:any){
+if(confirm("Are you sure to delete ")) {
+   
+  
+console.log(row);
+this.phonenumber=row.phonenumber;
+this.exchangeservice?.deletestudent(this.phonenumber).subscribe(
+        
+res=>this.student=res,  
 
+        
+      );
+      this.refreshList();
+
+  }
+  }
+
+  onupdate(row:any){
+    console.log(row.marks);
+    this.router.navigate(['/'],{queryParams:{name:row.name,phonenumber:row.phonenumber,address:row.address,dateofbirth:row.dateofbirth,marks:row.marks}});
+  }
 }

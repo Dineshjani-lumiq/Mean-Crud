@@ -36,7 +36,9 @@ gender:'',
 
     return this.http.get<Student[]>(this.baseURL);
   }
-
+findstudent(emp:number){
+  return this.http.get(this.baseURL+"/"+emp);
+}
 
   deletestudent(emp:number){
     console.log("delete");
@@ -44,7 +46,6 @@ gender:'',
     return this.http.delete(this.baseURL+"/"+emp);
 
   }
-
   
   updatestudent(emp?:Student){
 console.log("from update");

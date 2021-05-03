@@ -26,12 +26,19 @@
     <mat-cell *matCellDef="let row"> {{row.marks}} </mat-cell>
     
   </ng-container>
+   <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="action-link"> 
+      <button class="marginp" type="button" (click)="onupdate(row)" style="margin-left: 2px;height: 32px;"> <mat-icon>edit</mat-icon></button>
+          <button type="button" (click)="ondelete(row)" style="margin-left: 2px;height: 32px;"><mat-icon>delete</mat-icon></button> 
+      </mat-cell>
+    </ng-container>
 
   <!-- Title Definition -->
- 
+
 
   <!-- Header and Row Declarations -->
-   <mat-header-row *matHeaderRowDef="['name', 'phonenumber','gender','dateofbirth','address','Subjects']"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: ['name', 'phonenumber','gender','dateofbirth','address','Subjects']"></mat-row>
+   <mat-header-row *matHeaderRowDef="['name', 'phonenumber','gender','dateofbirth','address','Subjects','action']"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: ['name', 'phonenumber','gender','dateofbirth','address','Subjects','action']"></mat-row>
  
 </mat-table>

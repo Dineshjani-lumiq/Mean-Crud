@@ -20,39 +20,18 @@ unamePattern = "^[ a-zA-Z\-\']+$";
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 
   userForm = new FormGroup({
-	name: new FormControl('', [Validators.required,Validators.pattern(this.unamePattern),Validators.minLength(3)] ),
-  phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)]),
-    	gender: new FormControl(''),
-      dateofbirth:new FormControl(''),
-      address: new FormArray([
-
-
-      new FormControl('')
-    ]),
-Subjects: new FormArray([
-new FormControl(''),
-new FormControl(''),
-new FormControl(''),
-new FormControl(''),
-new FormControl('')
-])
-,
-
+  phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)])
     
   });
   onFormSubmit(): void {
     console.log(this.userForm.value);
-    var mp={
-      name:this.userForm?.get('name')?.value,
-gender:this.userForm?.get('gender')?.value,
-dateofbirth:this.userForm?.get('dateofbirth')?.value,
-       address: this.userForm?.get('address')?.value,
+    
+ 
+    
+var phonenumber=this.userForm?.get('phonenumber')?.value;
 
-phonenumber: this.userForm?.get('phonenumber')?.value,
-marks:this.userForm?.get('Subjects')?.value
-    }
-   
-    this.exchangeService.updatestudent(mp).subscribe(
+
+    this.exchangeService.findstudent(phonenumber).subscribe(
        
       res=>this.student=res,  
 err => console.log('HTTP Error', err),
