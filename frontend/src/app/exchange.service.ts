@@ -33,12 +33,11 @@ gender:'',
 
 
    getstudentList():Observable<Student[]> {
-
     return this.http.get<Student[]>(this.baseURL);
   }
-findstudent(emp:number){
-  return this.http.get(this.baseURL+"/"+emp);
-}
+findstudent(emp:number):Observable<Student[]> {
+    return this.http.get<Student[]>(this.baseURL+"/"+emp);
+  }
 
   deletestudent(emp:number){
     console.log("delete");

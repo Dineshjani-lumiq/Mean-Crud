@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Student } from './../studentmodel';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { ExchangeService } from './../exchange.service';
 
 import { NgForm ,FormGroup,FormArray,FormControl,Validators,ReactiveFormsModule} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -10,8 +13,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class UpdateComponent {
 
- constructor(private exchangeService: ExchangeService) { }
- student:any;
+ constructor(private router: Router,private exchangeService: ExchangeService) { }
+   
+
+ student:Student[]=[];
+ name:any;
+phonenumber:any;
   subjectlist=["History","Science","Math","Hindi","English"];
   formSubmitted = false;
    isValidFormSubmitted = false;
@@ -33,11 +40,13 @@ var phonenumber=this.userForm?.get('phonenumber')?.value;
 
     this.exchangeService.findstudent(phonenumber).subscribe(
        
-      res=>this.student=res,  
-err => console.log('HTTP Error', err),
-        () => console.log('HTTP request completed.')
-        
+      
+val => this.student=val
       );
+      console.log(this.student);
+      console.log("ram");
+          this.router.navigate(['/'], { queryParams: { name: this.student[0].name, phonenumber:this.student[0].phonenumber, address: this.student[0].address, dateofbirth: this.student[0].dateofbirth, marks: this.student[0].marks } });
+
       console.log(this.student);
     this.formSubmitted = true;
      this.isValidFormSubmitted = true;

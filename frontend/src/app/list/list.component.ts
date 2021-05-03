@@ -22,6 +22,8 @@ student:any;
   constructor(private router: Router,private exchangeservice:ExchangeService) { }
 
   ngOnInit(): void {
+    
+
 this.refreshList();
   }
   refreshList() {
@@ -57,7 +59,9 @@ res=>this.student=res,
   }
 
   onupdate(row:any){
+       
+       
     console.log(row.marks);
-    this.router.navigate(['/'],{queryParams:{name:row.name,phonenumber:row.phonenumber,address:row.address,dateofbirth:row.dateofbirth,marks:row.marks}});
+    this.router.navigate(['/'], { queryParams: { name: row.name, phonenumber: row.phonenumber, address: row.address, dateofbirth: row.dateofbirth, marks: row.marks } });
   }
 }

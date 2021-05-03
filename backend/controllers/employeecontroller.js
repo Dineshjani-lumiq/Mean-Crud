@@ -39,7 +39,8 @@ res.send(err);
        
  
 });
-router.post('/', (req, res) => {
+router.post('/', async(req, res) => {
+  /*
   console.log(req.body.name);
   console.log("from server");
   var stu = new student({
@@ -55,6 +56,18 @@ router.post('/', (req, res) => {
     if (!err) { res.send(doc); }
     else { res.send(err); }
   });
+  */
+ try{
+const doc = await student.findOneAndUpdate(
+  { phonenumber: req.body.phonenumber },
+  { $set: { name: req.body.name,dateofbirth:req.body.dateofbirth,gender:req.body.gender,address:req.body.address,marks:req.body.marks} },
+  { upsert: true, new: true }
+);
+res.send(docs);
+ }
+catch(err){
+res.send(err);
+}
 });
 /*
 router.delete('/:id', (req, res) => {
