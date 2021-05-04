@@ -1,20 +1,20 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgForm ,FormGroup,FormArray,FormControl,Validators,ReactiveFormsModule} from '@angular/forms';
 import { ExchangeService } from './../exchange.service';
-
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
- constructor(private exchangeService: ExchangeService) { }
+ constructor(private  router:Router,private exchangeService: ExchangeService) { }
 
  
   ngOnInit(): void {
   }
-  res:any;
-passwordPattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$";
+  res1:any;
+passwordPattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{10,}$";
   unamePattern = "^[ a-zA-Z\-\’]+$";
   formSubmitted = false;
    isValidFormSubmitted = false;
@@ -35,11 +35,19 @@ passwordPattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$
       console.log("ram");
       console.log(res);
     console.log(typeof(res));
-    this.res=res;
     if(res?.accesstoken){
+    this.res1="";
       localStorage.setItem("token",res.accesstoken);
+       this.router.navigate(['/']);
     }
-      console.log(localStorage.getItem("token"))
+    else{
+      if(res?.error){
+this.res1=res.error;
+
+      }
+      
+    }
+      
     })
    
     
@@ -55,6 +63,9 @@ passwordPattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$
   resetForm() { 
     this.userForm.reset();
   }
+forsignup(){
+        this.router.navigate(['/signup']);
 
+  }
 
 }

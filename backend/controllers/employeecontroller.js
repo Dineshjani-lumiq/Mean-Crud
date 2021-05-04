@@ -202,7 +202,7 @@ router.post('/signin',async(req,res)=>{
 	const user = await User.findOne({ username:username })
 
 	if (!user) {
-		return res.json({ status: 'error', error: 'Invalid username' })
+		return res.json({ status: 'error', error: 'There is no user registered with this username' })
 	}
 
 	if (await bcrypt.compare(password, user.password)) {
@@ -223,7 +223,7 @@ router.post('/signin',async(req,res)=>{
 		return res.json({ status: 'ok', accesstoken: token})
 	}
 
-	res.json({ status: 'error', error: 'Invalid password' })
+	res.json({ status: 'error', error: 'Your password is Incorrect' })
 })
 
 

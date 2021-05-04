@@ -16,6 +16,8 @@ export class SignupComponent implements OnInit {
   message="";
   smessage="";
   passwordPattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$";
+;
+  /* at least one l.c and 1 u.c and only 1 s.c*/
   unamePattern = "^[ a-zA-Z\-\’]+$";
   formSubmitted = false;
    isValidFormSubmitted = false;

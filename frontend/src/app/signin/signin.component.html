@@ -22,7 +22,7 @@
 
           </div>
           <label>
-              password:
+              Password:
             </label><br>
           <div>
             <input mdbInput class="margin" formControlName="password" placeholder="Enter password ">
@@ -32,12 +32,13 @@
           </div>
 
           <div>
-            <button type="submit" [disabled]="!userForm.valid" >Signin</button>
+            <button style="margin-left:15px; margin-top: 5px;" type="submit" [disabled]="!userForm.valid" >Signin</button>
+            <button style="margin-left:15px; margin-top: 5px"  (click)=forsignup()>SignUp</button>
 
           </div>
         </form>
         
-        
+        {{res1}}
        
         <div>
           <div class="col s7">
