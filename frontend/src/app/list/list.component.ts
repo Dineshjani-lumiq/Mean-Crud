@@ -30,8 +30,10 @@ this.refreshList();
     
       this.exchangeservice.getstudentList().subscribe(
      
-        lists => this.dataSource = lists,
-       err => console.log('HTTP Error', err),
+        lists => {this.dataSource = lists},
+       err => {if(err.status==401){
+         localStorage.removeItem('token');
+       }},
         () => console.log('HTTP request completed.')
           
     );
@@ -48,8 +50,15 @@ if(confirm("Are you sure to delete ")) {
 console.log(row);
 this.phonenumber=row.phonenumber;
 this.exchangeservice?.deletestudent(this.phonenumber).subscribe(()=>{
+         console.log(localStorage.getItem('token'));
+
   this.refreshList();
-}
+},
+ err => {if(err.status==401){
+         localStorage.removeItem('token');
+         this.router.navigate(['/signin']);
+       }}
+
       );
      
 

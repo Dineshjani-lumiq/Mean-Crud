@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -22,7 +23,7 @@ gender:any;
 marks:any[]=[];
 address1:any;
 name:any;
-  constructor(private route: ActivatedRoute,private exchangeService: ExchangeService) {
+  constructor(private router:Router,private route: ActivatedRoute,private exchangeService: ExchangeService) {
 
 
    }
@@ -64,7 +65,7 @@ unamePattern = "^[ a-zA-Z\-\’]+$";
 	name: new FormControl('', [Validators.required,Validators.pattern(this.unamePattern),Validators.minLength(3)] ),
   phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)]),
     	gender: new FormControl('',[Validators.required]),
-      dateofbirth:new FormControl('',[Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]),
+      
       address: new FormArray([
 
 
@@ -99,11 +100,16 @@ phonenumber: this.userForm?.get('phonenumber')?.value,
 marks:this.userForm?.get('Subjects')?.value
     }
    
-    this.exchangeService.postEmployee(mp).subscribe(res => 
+    this.exchangeService.postEmployee(mp).subscribe(res => {
         
-       console.log("data saved successfully"),
+       console.log("data saved successfully")},
 
-      err => console.log('HTTP Error', err),
+      
+      err => {if(err.status==401){
+         localStorage.removeItem('token');
+                  this.router.navigate(['/signin']);
+
+       }},
         () => console.log('HTTP request completed.') 
         
       );

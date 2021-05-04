@@ -27,8 +27,8 @@ unamePattern = "^[ a-zA-Z\-\']+$";
   mobnumPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 
   userForm = new FormGroup({
-  phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)])
-    
+    phonenumber: new FormControl('', [Validators.pattern(this.mobnumPattern)])
+
   });
   onFormSubmit(): void {
     console.log(this.userForm.value);
@@ -56,7 +56,15 @@ else{
           this.router.navigate(['/'], { queryParams: { name: this.student[0].name, phonenumber:this.student[0].phonenumber, address: this.student[0].address, dateofbirth: this.student[0].dateofbirth, marks: this.student[0].marks,gender:this.student[0].gender} });}
 
 
-}
+},
+err => {if(err.status==401){
+         localStorage.removeItem('token');
+                  this.router.navigate(['/signin']);
+
+       }
+       console.log(localStorage.getItem('token'));
+      }
+       
       );
       console.log(this.student);
       console.log("ram");

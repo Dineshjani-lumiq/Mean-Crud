@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth.guard';
 import { from } from 'rxjs';
 import { ExchangeService } from './exchange.service';
 import { NgModule } from '@angular/core';
@@ -13,8 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {MaterialModule} from './material/material.module';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component'
-import {CommonModule} from '@angular/common'
-
+import {CommonModule} from '@angular/common';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {CommonModule} from '@angular/common'
     ListComponent,
     FormComponent,
     UpdateComponent,
-    DeleteComponent
+    DeleteComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ import {CommonModule} from '@angular/common'
     MaterialModule,
     CommonModule  
   ],
-  providers: [ExchangeService],
+  providers: [ExchangeService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

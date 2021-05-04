@@ -1,8 +1,17 @@
 const express = require('express');
+const app=express();
 var router = express.Router();
-
+var User =require('../models/user');
+const bcrypt = require('bcrypt');
+const auth=require('../middleware/auth');
+var cors = require('cors');
+app.use(cors())
 
 var { student } = require('../models/model');
+
+const jwt = require('jsonwebtoken')
+
+const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk';
 
 // => localhost:3000/employees/
 /*
@@ -14,7 +23,8 @@ router.get('/', (req, res) => {
 });
 
 */
-router.get('/', async (req, res) => {
+router.get('/',auth,async (req, res) => {
+  console.log(req);
   try{
 
    const docs= await student.find({});
@@ -26,7 +36,7 @@ res.send(err);
        
  
 });
-router.get('/:id', async (req, res) => {
+router.get('/:id',auth, async (req, res) => {
   try{
 
    const docs= await student.find({phonenumber: req.params.id });
@@ -39,7 +49,7 @@ res.send(err);
        
  
 });
-router.post('/', async(req, res) => {
+router.post('/',auth, async(req, res) => {
   /*
   console.log(req.body.name);
   console.log("from server");
@@ -102,7 +112,7 @@ router.delete('/:id', (req, res) => {
 });
 */
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth,async (req, res) => {
  try{
    console.log(req.params.id);
    const ans= await student.find({phonenumber: req.params.id });
@@ -131,7 +141,7 @@ res.send(ans1);
 
 });
 
-router.put('/', (req, res) => {
+router.put('/',auth, (req, res) => {
   console.log(typeof (req.body.phonenumber));
   var a = parseInt(req.body.phonenumber);
   student.find({ phonenumber: a }, function (err, ans) {
@@ -157,6 +167,63 @@ router.put('/', (req, res) => {
       })
     }
   })
+})
+
+router.post('/signup',async(req,res)=>{
+  console.log(req.body);
+  console.log("from server");
+  const username = req.body.Username;
+    const plainPassword=req.body.Password;
+    	const password = await bcrypt.hash(plainPassword, 10);
+      try {
+		const response = await User.create({
+			username,
+			password
+		})
+		console.log('User created successfully: ', response)
+	} catch (error) {
+		if (error.code === 11000) {
+			// duplicate key
+			return res.json({ status: 'error', error: 'Username already in use' })
+		}
+		throw error
+	}
+
+res.status(201).json({
+            message: 'Successfully registered'
+          });
+
+})
+
+router.post('/signin',async(req,res)=>{
+    
+	const username = req.body.Username;
+    const password=req.body.Password;
+	const user = await User.findOne({ username:username })
+
+	if (!user) {
+		return res.json({ status: 'error', error: 'Invalid username' })
+	}
+
+	if (await bcrypt.compare(password, user.password)) {
+		// the username, password combination is successful
+
+		const token = jwt.sign(
+			{
+				id: user._id,
+				username: user.username
+			},
+			JWT_SECRET,
+            {
+                    expiresIn: 120 // expires in 2 minute
+                }
+		)
+        
+
+		return res.json({ status: 'ok', accesstoken: token})
+	}
+
+	res.json({ status: 'error', error: 'Invalid password' })
 })
 
 

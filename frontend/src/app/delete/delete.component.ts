@@ -32,9 +32,11 @@ var phonenumber=this.userForm?.get('phonenumber')?.value;
    
     this.exchangeService?.deletestudent(phonenumber).subscribe(
         
-res=>this.student=res,  
-err => this.error=err  
-        
+res=>{this.student=res},  
+
+        err => {if(err.status==401){
+         localStorage.removeItem('token');
+       }}
       );
     this.formSubmitted = true;
      this.isValidFormSubmitted = true;

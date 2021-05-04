@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable,of, from } from 'rxjs';
 
 import { map } from 'rxjs/operators';
@@ -28,28 +28,38 @@ gender:'',
     postEmployee(emp?: Student) {
     console.log("received");
     console.log(emp);
-    return this.http.post(this.baseURL, emp);
+    return this.http.post(this.baseURL, emp,{headers:new HttpHeaders({'Authorization':'  Bearer '+localStorage.getItem('token')})});
+  }
+signupstudent(emp?: any):Observable<any>{
+    console.log("received");
+    console.log(emp);
+    return this.http.post(this.baseURL+"/"+"signup", emp);
   }
 
+signinstudent(emp?: any):Observable<any>{
+    console.log("received");
+    console.log(emp);
+    return this.http.post(this.baseURL+"/"+"signin", emp);
+  }
 
    getstudentList():Observable<Student[]> {
-    return this.http.get<Student[]>(this.baseURL);
+    return this.http.get<Student[]>(this.baseURL,{headers:new HttpHeaders({'Authorization':'  Bearer '+localStorage.getItem('token')})});
   }
 findstudent(emp:number):Observable<Student[]> {
-    return this.http.get<Student[]>(this.baseURL+"/"+emp);
+    return this.http.get<Student[]>(this.baseURL+"/"+emp,{headers:new HttpHeaders({'Authorization':'  Bearer '+localStorage.getItem('token')})});
   }
 
   deletestudent(emp:number){
     console.log("delete");
     console.log(emp);
-    return this.http.delete(this.baseURL+"/"+emp);
+    return this.http.delete(this.baseURL+"/"+emp,{headers:new HttpHeaders({'Authorization':'  Bearer '+localStorage.getItem('token')})});
 
   }
   
   updatestudent(emp?:Student){
 console.log("from update");
     console.log(emp);
-    return this.http.put(this.baseURL, emp);
+    return this.http.put(this.baseURL, emp,{headers:new HttpHeaders({'Authorization':'  Bearer '+localStorage.getItem('token')})});
 
   }
 

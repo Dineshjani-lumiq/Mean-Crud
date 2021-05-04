@@ -1,0 +1,51 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+
+
+      <div *ngIf="userForm.invalid && !formSubmitted" [ngClass]="'error'"> Form not validated. </div>
+      <div *ngIf="formSubmitted" [ngClass]="'success'"> Form submitted successfully. </div> <br />
+      <div class="form-group">
+        <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+           
+        <label>
+              Name:
+            </label><br>
+<div>
+            <input mdbInput class="margin" formControlName="Username" placeholder="Enter Username">
+            <label *ngIf="userForm.get('Username')?.invalid&&(userForm.controls['Username'].dirty || userForm.controls['Username'].touched)" [ngClass]="'error'"> 
+                Username invalid
+            </label>
+
+          </div>
+          <label>
+              password:
+            </label><br>
+          <div>
+            <input mdbInput class="margin" formControlName="password" placeholder="Enter password ">
+            <label *ngIf="userForm.get('password')?.invalid&&(userForm.controls['password'].dirty || userForm.controls['password'].touched)" [ngClass]="'error'">
+                password invalid </label>
+
+          </div>
+
+          <div>
+            <button type="submit" [disabled]="!userForm.valid" >Signin</button>
+
+          </div>
+        </form>
+        
+        
+       
+        <div>
+          <div class="col s7">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
