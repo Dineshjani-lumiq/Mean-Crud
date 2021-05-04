@@ -22,7 +22,7 @@ student:any;
   constructor(private router: Router,private exchangeservice:ExchangeService) { }
 
   ngOnInit(): void {
-    
+
 
 this.refreshList();
   }
@@ -47,13 +47,11 @@ if(confirm("Are you sure to delete ")) {
   
 console.log(row);
 this.phonenumber=row.phonenumber;
-this.exchangeservice?.deletestudent(this.phonenumber).subscribe(
-        
-res=>this.student=res,  
-
-        
+this.exchangeservice?.deletestudent(this.phonenumber).subscribe(()=>{
+  this.refreshList();
+}
       );
-      this.refreshList();
+     
 
   }
   }
@@ -62,6 +60,7 @@ res=>this.student=res,
        
        
     console.log(row.marks);
-    this.router.navigate(['/'], { queryParams: { name: row.name, phonenumber: row.phonenumber, address: row.address, dateofbirth: row.dateofbirth, marks: row.marks } });
+    console.log(row.gender);
+    this.router.navigate(['/'], { queryParams: { name: row.name, phonenumber: row.phonenumber, address: row.address, dateofbirth: row.dateofbirth, marks: row.marks,gender:row.gender } });
   }
 }

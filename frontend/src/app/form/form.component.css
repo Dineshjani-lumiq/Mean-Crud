@@ -15,6 +15,7 @@
 }
 .error{
     color: red;
+     font-size: 15px;
 } 
 
 .subjects{
@@ -54,3 +55,7 @@ input[type=text] {
     height: 12px;
 width: 12px;
 }
+.success{
+    color: green;
+    font-size: 20px;
+} 

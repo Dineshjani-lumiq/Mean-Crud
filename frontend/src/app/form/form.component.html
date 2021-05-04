@@ -11,7 +11,7 @@
             <label>
               Name:
             </label><br>
-            <input mdbInput class="margin" [(ngModel)]="name" formControlName="name" placeholder="Enter Name"> 
+            <input mdbInput class="margin"  formControlName="name" placeholder="Enter Name"> 
 
             <div *ngIf="userForm.controls['name'].dirty  &&(userForm.controls['name'].errors || userForm.controls['name'].invalid)" class="error">
               <div *ngIf="userForm.controls['name'].errors?.required">
@@ -29,12 +29,11 @@
             </div>
 
           </div>
-
           <div>
             <label>
                 Phonenumber:</label>
                 <br>
-            <input mdbInput class="margin" [(ngModel)]="phonenumber"formControlName="phonenumber" placeholder="Enter phonenumber ">
+            <input mdbInput class="margin" formControlName="phonenumber" placeholder="Enter phonenumber ">
                <div *ngIf="userForm.controls['phonenumber'].errors?.required&&(userForm.controls['phonenumber'].dirty || userForm.controls['phonenumber'].touched)" class="error">
                phonenumber required.
               </div>
@@ -45,12 +44,27 @@ Phonenumber should be 10 digit
           </div>
 
           </div>
+ 
 
+<!---->
+<mat-form-field>
+        <input matInput readonly [matDatepicker]="picker" placeholder="Date of birth" formControlName="dob"
+          (dateChange)="date($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  
+
+
+
+
+
+<!--
           <div>
             <label>
               dateofbirth:</label>
               <br>
-            <input mdbInput class="margin" [(ngModel)]="dateofbirth" formControlName="dateofbirth" placeholder="Enter dateofbirth ">
+            <input mdbInput class="margin"  formControlName="dateofbirth" placeholder="Enter dateofbirth ">
               <div *ngIf="userForm.controls['dateofbirth'].errors?.required&&(userForm.controls['dateofbirth'].dirty || userForm.controls['dateofbirth'].touched)" class="error">
                dateofbirth required.
               </div>
@@ -61,17 +75,17 @@ Birthdate should be in yyyy-mm-dd format
           </div>
 
           </div>
-          
+        -->
           <div class="check">
             <label>Select gender:</label>
           <label class="forinline">
             <span>male</span>
-     <input type="radio" value="Male" [(ngModel)]="gender"formControlName="gender" class="box" style="margin-left: 12px">
+     <input type="radio" value="Male" formControlName="gender"  checked class="box" style="margin-left: 12px">
        
    </label>
    <label class="forinline">
      <span>female</span>
-     <input type="radio" value="Female" [(ngModel)]="gender"formControlName="gender" class="box">
+     <input type="radio" value="Female" formControlName="gender"  class="box">
        
    </label>
           </div>

@@ -114,9 +114,8 @@ router.delete('/:id', async (req, res) => {
     else{
       console.log(req.params.id);
             const ans1= await student.deleteMany({ phonenumber: req.params.id });
- res.status(201).json({
-            message: 'Successfully deleted'
-          });
+            console.log(ans1);
+res.send(ans1);
 
         }
     

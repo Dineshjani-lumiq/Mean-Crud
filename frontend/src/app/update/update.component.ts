@@ -15,7 +15,7 @@ export class UpdateComponent {
 
  constructor(private router: Router,private exchangeService: ExchangeService) { }
    
-
+message:any;
  student:Student[]=[];
  name:any;
 phonenumber:any;
@@ -41,11 +41,31 @@ var phonenumber=this.userForm?.get('phonenumber')?.value;
     this.exchangeService.findstudent(phonenumber).subscribe(
        
       
-val => this.student=val
+val => {this.student=val
+	
+	if(this.student.length==0){
+    /*
+        this.message="Phonenumber is not persent in database";
+        */
+       console.log(this.phonenumber);
+         this.router.navigate(['/'], { queryParams: { phonenumber:phonenumber} });
+
+      }
+
+else{
+          this.router.navigate(['/'], { queryParams: { name: this.student[0].name, phonenumber:this.student[0].phonenumber, address: this.student[0].address, dateofbirth: this.student[0].dateofbirth, marks: this.student[0].marks,gender:this.student[0].gender} });}
+
+
+}
       );
       console.log(this.student);
       console.log("ram");
-          this.router.navigate(['/'], { queryParams: { name: this.student[0].name, phonenumber:this.student[0].phonenumber, address: this.student[0].address, dateofbirth: this.student[0].dateofbirth, marks: this.student[0].marks } });
+      console.log(this.student.length);
+     /* if(this.student.length==0){
+        this.message="Phonenumber is not persent in database";
+      }
+      else{
+          this.router.navigate(['/'], { queryParams: { name: this.student[0].name, phonenumber:this.student[0].phonenumber, address: this.student[0].address, dateofbirth: this.student[0].dateofbirth, marks: this.student[0].marks } });}*/
 
       console.log(this.student);
     this.formSubmitted = true;
