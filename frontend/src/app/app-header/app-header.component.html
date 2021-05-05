@@ -1,8 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" >
+<div style="background-color: #e3f2fd;display:flex"><div>
+<nav class="navbar navbar-expand-lg navbar-light"  >
   
   
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div style="display: inline;" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
      <li class="nav-item" >
         <a class="nav-link" routerLink="/">Form </a>
@@ -20,4 +21,11 @@
     
     </ul>
   </div>
+  
 </nav>
+</div>
+<div class="float:right" style="display: inline;align-content: center;height: 80px;position: absolute;right: 15px;margin-top: 15px;">
+            <button  mat-flat-button (click)=logout() color="primary">Logout</button>
+
+</div>
+</div>

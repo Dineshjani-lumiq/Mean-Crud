@@ -1,11 +1,12 @@
-<div class="container">
-  <div class="row">
-    <div class="col s12">
 
+    <div class="col s12" >
 
+<mat-card>
+    <mat-card-content>
+<div class="header">
+        <P>Create  Sigup </P>
+      </div>
 
-
-      <div *ngIf="userForm.invalid && !formSubmitted" [ngClass]="'error'"> Form not validated. </div>
       <div *ngIf="formSubmitted" [ngClass]="'success'"> Form submitted successfully. </div> <br />
       <div class="form-group">
         <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
@@ -20,20 +21,23 @@
             </label>
 
           </div>
-          <label>
+          <mat-label>
               Password:
-            </label><br>
+            </mat-label><br>
           <div>
-            <input mdbInput class="margin" formControlName="password" placeholder="Enter password ">
+            <input mdbInput class="margin" formControlName="password"  [type]="hide ? 'password' : 'text'" placeholder="Enter password ">
+             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
             <label *ngIf="userForm.get('password')?.invalid&&(userForm.controls['password'].dirty || userForm.controls['password'].touched)" [ngClass]="'error'">
                 password invalid </label>
 
           </div>
 
           <div>
-            <button style="margin-left:15px;margin-top: 5px" type="submit" [disabled]="!userForm.valid" >Signup</button>
+            <button style="margin-left:15px;margin-top: 5px" type="submit" [disabled]="!userForm.valid" mat-flat-button color="primary">Signup</button>
 
-             <button style="margin-left:15px;margin-top: 5px"  (click)=forsignin()>Signin</button>
+             <button style="margin-left:15px;margin-top: 5px"  (click)=forsignin() mat-flat-button color="primary">Signin</button>
        
           </div>
         </form>
@@ -49,7 +53,7 @@
           </div>
         </div>
       </div>
+      </mat-card-content>
+  </mat-card>
     </div>
-  </div>
-
-</div>
+ 

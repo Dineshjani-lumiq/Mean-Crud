@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
   }
+    hide = true;
   message="";
   smessage="";
   passwordPattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,}$";

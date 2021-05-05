@@ -33,6 +33,7 @@ this.refreshList();
         lists => {this.dataSource = lists},
        err => {if(err.status==401){
          localStorage.removeItem('token');
+         this.router.navigate(['/']);
        }},
         () => console.log('HTTP request completed.')
           

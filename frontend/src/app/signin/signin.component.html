@@ -1,12 +1,14 @@
 
-<div class="container">
-  <div class="row">
-    <div class="col s12">
+ <div class="col s12" >
+
+<mat-card>
+    <mat-card-content>
+<div class="header">
+        <P>Sign Into Your Account </P>
+      </div>
 
 
 
-
-      <div *ngIf="userForm.invalid && !formSubmitted" [ngClass]="'error'"> Form not validated. </div>
       <div *ngIf="formSubmitted" [ngClass]="'success'"> Form submitted successfully. </div> <br />
       <div class="form-group">
         <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
@@ -15,7 +17,7 @@
               Name:
             </label><br>
 <div>
-            <input mdbInput class="margin" formControlName="Username" placeholder="Enter Username">
+            <input mdbInput class="margin" formControlName="Username"   placeholder="Enter Username">
             <label *ngIf="userForm.get('Username')?.invalid&&(userForm.controls['Username'].dirty || userForm.controls['Username'].touched)" [ngClass]="'error'"> 
                 Username invalid
             </label>
@@ -26,27 +28,29 @@
             </label><br>
           <div>
             <input mdbInput class="margin" formControlName="password" placeholder="Enter password ">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
             <label *ngIf="userForm.get('password')?.invalid&&(userForm.controls['password'].dirty || userForm.controls['password'].touched)" [ngClass]="'error'">
                 password invalid </label>
 
           </div>
 
           <div>
-            <button style="margin-left:15px; margin-top: 5px;" type="submit" [disabled]="!userForm.valid" >Signin</button>
-            <button style="margin-left:15px; margin-top: 5px"  (click)=forsignup()>SignUp</button>
+            <button style="margin-left:15px; margin-top: 5px;" type="submit" [disabled]="!userForm.valid" mat-flat-button color="primary">Signin</button>
+            <button style="margin-left:15px; margin-top: 5px"  (click)=forsignup() mat-flat-button color="primary">SignUp</button>
 
           </div>
         </form>
+        <div class="error">{{res1}}</div>
         
-        {{res1}}
-       
         <div>
           <div class="col s7">
 
           </div>
         </div>
       </div>
+     </mat-card-content>
+  </mat-card>
     </div>
-  </div>
-
-</div>
+ 

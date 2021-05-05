@@ -13,6 +13,7 @@ export class SigninComponent implements OnInit {
  
   ngOnInit(): void {
   }
+  hide=true;
   res1:any;
 passwordPattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{10,}$";
   unamePattern = "^[ a-zA-Z\-\’]+$";
